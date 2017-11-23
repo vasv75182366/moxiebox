@@ -18,11 +18,18 @@ TESTS = \
 	exit0 \
 	exit1 \
 	rtlib \
-	sha256
+	sha256 \
+	fib_recursive \
+	fib_iterative \
+	fib_tail_recursion
 
 all: $(TESTS)
 
 %: %.c
+	$(MOX_CC) $(CFLAGS) -c $<
+	$(MOX_CC) $(LDFLAGS) -o $@ $@.o
+
+%: %.s
 	$(MOX_CC) $(CFLAGS) -c $<
 	$(MOX_CC) $(LDFLAGS) -o $@ $@.o
 
